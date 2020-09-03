@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 
+using ForwardTask.Base;
 using ForwardTask.Engines;
-using ForwardTask.Data;
+using ForwardTask.TestBench;
 
 
 
@@ -13,7 +14,7 @@ namespace ForwardTask
 	{
 		static void Main( string[] args )
 		{
-			var parameters = new EngineParameters();
+			var parameters = new SimulationParameters();
 			parameters.MomentOfInertia = 10;
 			parameters.CrankshaftSpeedToTorquePoints = new List< Point >
 			{
@@ -24,18 +25,18 @@ namespace ForwardTask
 				new Point( 250, 75 ), 
 				new Point( 300, 0 )
 			};
-			parameters.OverheatTemperature = 110;
+			parameters.OverheatTemperature = new Base.Temperature( 110.0 );
 			parameters.HeatingSpeedOfTorqueCoeff = 0.01;
 			parameters.HeatingSpeedOfCrankshaftSpeedCoeff = 0.0001;
 			parameters.CoolingSpeedOfTemperaturesCoeff = 0.1;
 
 			Console.Write( "Enter ambient temperature : " );
-			double ambientTemperature = Convert.ToInt32( Console.ReadLine() );				
+			double ambientTemperature = Convert.ToInt32( Console.ReadLine() );
 
-			var testBench = new TestBench( parameters, ambientTemperature );
-			var timeSpan = testBench.Simulate( new ICEngine() );
-
-			Console.WriteLine( "Total time : " + timeSpan.Seconds );
+			var simulator = new InternalCombustionEngineSimulator( parameters, new Base.Temperature( ambientTemperature ) );
+			TestBench.TestBench.Start( simulator, new InternalCombustionEngine() );
+			
+			Console.WriteLine( "Total time to overheat : " + simulator.EngineWorkingTime.Seconds );
 		}
 	}
 }

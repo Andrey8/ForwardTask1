@@ -4,7 +4,7 @@ using System.Linq;
 
 
 
-namespace ForwardTask.Data
+namespace ForwardTask.Base
 {
 	public class Point
 	{

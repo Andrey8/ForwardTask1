@@ -41,13 +41,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Data\Point.cs" />
-    <Compile Include="EngineParameters.cs" />
-    <Compile Include="Engines\ICEngine.cs" />
-    <Compile Include="Engines\IEngine.cs" />
+    <Compile Include="Base\Point.cs" />
+    <Compile Include="Base\Range.cs" />
+    <Compile Include="Base\Temperature.cs" />
+    <Compile Include="TestBench\SimulationParameters.cs" />
+    <Compile Include="Engines\AbstractEngine.cs" />
+    <Compile Include="Engines\InternalCombustionEngine.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="TestBench.cs" />
+    <Compile Include="TestBench\IEngineSimulator.cs" />
+    <Compile Include="TestBench\InternalCombustionEngineSimulator.cs" />
+    <Compile Include="TestBench\TestBench.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
